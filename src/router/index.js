@@ -21,11 +21,7 @@ export default new Router({
         component: resolve => require(['../components/common/Home.vue'], resolve),
         meta: { title: '自述文件' },
         children:[
-            {
-                path: '/dashboard',
-                component: resolve => require(['../components/page/Dashboard.vue'], resolve),
-                meta: { title: '系统首页' }
-            },
+             
             {
                 path: '/404',
                 component: resolve => require(['../components/page/404.vue'], resolve),

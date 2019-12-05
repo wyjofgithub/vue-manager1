@@ -16,7 +16,7 @@
                                 </el-menu-item>
                             </el-submenu>
                             <el-menu-item v-else :index="subItem.index" :key="subItem.index">
-                                {{ subItem.title }}
+                                <i :class="item.icon"></i>{{ subItem.title }}
                             </el-menu-item>
                         </template>
                     </el-submenu>
@@ -38,17 +38,14 @@
             return {
                 collapse: false,
                 items: [
+                     
                     {
-                        icon: 'el-icon-lx-home',
-                        index: 'dashboard',
-                        title: '系统首页'
-                    },
-                    {
-                        icon: 'el-icon-lx-home',
+                        icon: 'iconfont icon-shouye',
                         index:'2',
                         title:'一级菜单',
                         subs:[
                             {
+                                icon: 'iconfont icon-shouye',
                                 index: 'test',
                                 title: '测试二级菜单'
                             }
