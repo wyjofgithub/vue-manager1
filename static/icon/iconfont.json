@@ -6,11 +6,25 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "1043201",
+      "name": "用户名",
+      "font_class": "yonghuming",
+      "unicode": "e606",
+      "unicode_decimal": 58886
+    },
+    {
       "icon_id": "7587742",
       "name": "首页",
       "font_class": "shouye",
       "unicode": "e608",
       "unicode_decimal": 58888
+    },
+    {
+      "icon_id": "10351421",
+      "name": "密码",
+      "font_class": "lunkuodasan-",
+      "unicode": "e612",
+      "unicode_decimal": 58898
     }
   ]
 }
