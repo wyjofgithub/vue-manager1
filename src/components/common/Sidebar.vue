@@ -41,13 +41,13 @@
                      
                     {
                         icon: 'iconfont icon-shouye',
-                        index:'2',
-                        title:'一级菜单',
+                        index:'1',
+                        title:'首页管理',
                         subs:[
                             {
                                 icon: 'iconfont icon-shouye',
-                                index: 'test',
-                                title: '测试二级菜单'
+                                index: 'page_index',
+                                title: '首页Banner'
                             }
                         ]
                     } 

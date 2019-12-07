@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import test from '@/components/page/test.vue'
+import page_index from '../components/page/page_index.vue'
 
 
 Vue.use(Router)
@@ -31,6 +32,11 @@ export default new Router({
                 path: '/test',
                 component: test,
                 meta:{title:'测试路由'}
+            },
+            {
+                path : '/page_index',
+                component : page_index,
+                meta : {title:'首页管理'}
             } 
         ]
     }

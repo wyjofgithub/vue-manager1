@@ -13,6 +13,20 @@
       "unicode_decimal": 58886
     },
     {
+      "icon_id": "1631353",
+      "name": "新增",
+      "font_class": "add",
+      "unicode": "e609",
+      "unicode_decimal": 58889
+    },
+    {
+      "icon_id": "7091370",
+      "name": "删除",
+      "font_class": "shanchu",
+      "unicode": "e62d",
+      "unicode_decimal": 58925
+    },
+    {
       "icon_id": "7587742",
       "name": "首页",
       "font_class": "shouye",
@@ -20,11 +34,25 @@
       "unicode_decimal": 58888
     },
     {
+      "icon_id": "8551034",
+      "name": "新增",
+      "font_class": "xinzeng",
+      "unicode": "e610",
+      "unicode_decimal": 58896
+    },
+    {
       "icon_id": "10351421",
       "name": "密码",
       "font_class": "lunkuodasan-",
       "unicode": "e612",
       "unicode_decimal": 58898
+    },
+    {
+      "icon_id": "11839580",
+      "name": "删除",
+      "font_class": "shanchu1",
+      "unicode": "e65f",
+      "unicode_decimal": 58975
     }
   ]
 }

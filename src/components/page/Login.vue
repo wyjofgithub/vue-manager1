@@ -2,21 +2,21 @@
     <div class="login-wrap" style="background-image:url()">
         <div class="ms-login" >
             <div class="ms-title">后台管理系统</div>
-            <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="0px" class="ms-content">
+            <el-form :model="ruleForm"   ref="ruleForm" label-width="0px" class="ms-content">
                 <el-form-item prop="username">
-                    <el-input v-model="ruleForm.username" placeholder="请输入登陆名">
+                    <el-input v-model="ruleForm.userName" placeholder="请输入登陆名">
                         <el-button slot="prepend" icon="iconfont icon-yonghuming"></el-button>
                     </el-input>
                 </el-form-item>
                 <br>
                 <el-form-item prop="password">
-                    <el-input type="password" placeholder="请输入密码" v-model="ruleForm.password" @keyup.enter.native="submitForm('ruleForm')">
+                    <el-input type="password" placeholder="请输入密码" v-model="ruleForm.userPassword" @keyup.enter.native="submitForm('ruleForm')">
                         <el-button slot="prepend" icon="iconfont icon-lunkuodasan-"></el-button>
                     </el-input>
                 </el-form-item>
                 <br>
                 <div class="login-btn">
-                    <el-button type="primary" @click="submitForm('ruleForm')">登录</el-button>
+                    <el-button type="primary" @click="submitForm('ruleForm')" :loading="flg">登录</el-button>
                 </div>
             </el-form>
         </div>
@@ -28,25 +28,26 @@
         data: function(){
             return {
                 ruleForm: {
-                    username: '',
-                    password: ''
+                    userName: '',
+                    userPassword: ''
                 },
-                rules: {
-                    username: [
-                        { required: true, message: '请输入用户名', trigger: 'blur' }
-                    ],
-                    password: [
-                        { required: true, message: '请输入密码', trigger: 'blur' }
-                    ]
-                }
+                flg:false
+                
             }
         },
         methods: {
             submitForm(formName) {
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
-                        localStorage.setItem('ms_username',this.ruleForm.username);
-                        this.$router.push('/test');
+                        this.flg=true;
+                         this.$axios.post("/userLogin",this.ruleForm).then(result=>{
+                             if(result.data.code==200){
+                                 console.log(result.data.data)
+                                 localStorage.setItem('OPPO_MY_TOKEN',result.data.data)
+                                 this.$router.push({ path: '/page_index'})
+                             }
+                             this.flg=false;
+                         })
                     } else {
                         console.log('error submit!!');
                         return false;
