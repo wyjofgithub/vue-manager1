@@ -107,16 +107,24 @@
           </table>
         </el-form>
       </el-tab-pane>
-
-      <el-tab-pane label="品牌广告" name="third">
+      <!-- 品牌广告    style="width: 1110px;" -->
+      <el-tab-pane label="品牌广告" name="third" style="height: 100%;">
+        <br />
+        <br />
         <el-upload
           class="avatar-uploader"
+          style="height: 92%;"
           action="https://jsonplaceholder.typicode.com/posts/"
           :show-file-list="false"
           :before-close="handleClose"
           :before-upload="pinPaiBeforeAvatarUpload"
         >
-          <img v-if="oppoIndexBrand.img" :src="oppoIndexBrand.img" class="avatar" />
+          <img
+            v-if="oppoIndexBrand.img"
+            :src="oppoIndexBrand.img"
+            class="avatar"
+            style="max-height: 600px;"
+          />
           <i v-else class="el-icon-plus avatar-uploader-icon"></i>
         </el-upload>
       </el-tab-pane>
@@ -192,12 +200,12 @@ export default {
       done();
     },
     /**品牌广告 */
-    getoppoIndexBrand(){
-        this.$axios.get('/oppoIndexBrand/select').then(result=>{
-            if(result.data.code==200){
-                this.oppoIndexBrand=result.data.data;
-            }
-        })
+    getoppoIndexBrand() {
+      this.$axios.get("/oppoIndexBrand/select").then(result => {
+        if (result.data.code == 200) {
+          this.oppoIndexBrand = result.data.data;
+        }
+      });
     },
     pinPaiBeforeAvatarUpload(file) {
       var storeAs = "upload-file";
@@ -332,7 +340,7 @@ export default {
 };
 </script>
 
-<style>
+<style >
 .icon {
   width: 1em;
   height: 1em;
@@ -366,16 +374,7 @@ export default {
   height: 100%;
   display: block;
 }
-.el-tabs__nav {
-  width: 100%;
-}
-.el-tabs__item {
-  width: 33.33333%;
-  text-align: center;
-}
-.el-tabs__active-bar .is-top {
-  width: 100%;
-}
+
 .el-input {
   margin-left: -40px;
 }

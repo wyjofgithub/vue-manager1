@@ -28,8 +28,8 @@
         data: function(){
             return {
                 ruleForm: {
-                    userName: '',
-                    userPassword: ''
+                    userName: 'oppo',
+                    userPassword: '123456'
                 },
                 flg:false
                 

@@ -2,8 +2,8 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import test from '@/components/page/test.vue'
 import page_index from '../components/page/page_index.vue'
-
-
+import gongsi_index from '../components/page/gongsi_index.vue'
+import xinxiliu_index from '../components/page/xinxiliu_index.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -37,6 +37,17 @@ export default new Router({
                 path : '/page_index',
                 component : page_index,
                 meta : {title:'首页管理'}
+            },
+            {
+                path : '/gongsi_index',
+                component : gongsi_index,
+                meta : {title : '公司简介'}
+            },
+            {
+                path : '/xinxiliu_index',
+                component : xinxiliu_index,
+                meta : {title :"oppo信息流"}
+
             } 
         ]
     }

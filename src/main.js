@@ -19,7 +19,7 @@ Vue.config.productionTip = false
 Vue.use(ElementUI, {
     size: 'small'
 });
-axios.defaults.baseURL = 'http://localhost:6001';
+axios.defaults.baseURL = 'http://localhost:7001';
 axios.defaults.withCredentials=true;
 Vue.prototype.$axios = axios;
 

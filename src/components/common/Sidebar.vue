@@ -39,18 +39,24 @@
                 collapse: false,
                 items: [
                      
-                    {
-                        icon: 'iconfont icon-shouye',
-                        index:'1',
-                        title:'首页管理',
-                        subs:[
+                   
                             {
                                 icon: 'iconfont icon-shouye',
                                 index: 'page_index',
-                                title: '首页Banner'
+                                title: '首页配置'
+                            },
+                            {
+                                icon: 'iconfont icon-gongsi',
+                                index: 'gongsi_index',
+                                title: '公司简介'
+                            },
+                            {
+                                icon: 'iconfont icon-gongsi',
+                                index: 'xinxiliu_index',
+                                title: 'oppo信息流'
                             }
-                        ]
-                    } 
+                         
+                     
                      
                 ]
             }

@@ -27,6 +27,13 @@
       "unicode_decimal": 58925
     },
     {
+      "icon_id": "7404290",
+      "name": "公司",
+      "font_class": "gongsi",
+      "unicode": "e769",
+      "unicode_decimal": 59241
+    },
+    {
       "icon_id": "7587742",
       "name": "首页",
       "font_class": "shouye",
