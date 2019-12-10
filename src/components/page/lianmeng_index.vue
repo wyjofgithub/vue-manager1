@@ -4,6 +4,8 @@
     <el-tabs v-model="activeName" @tab-click="handleClick">
       <!----------------------Banner图----------------------------------->
       <el-tab-pane label="Banner图" name="first">
+        <br />
+        <br />
         <el-upload
           class="avatar-uploader"
           style="height: 92%;"
@@ -17,6 +19,8 @@
       </el-tab-pane>
       <!----------------------OPPO联盟----------------------------------->
       <el-tab-pane label="OPPO联盟" name="second">
+        <br />
+        <br />
         <el-upload
           class="avatar-uploader"
           style="height: 92%;"
@@ -25,6 +29,21 @@
           :before-upload="BeforeAvatarUpload"
         >
           <img v-if="lianmeng.img" :src="lianmeng.img" class="avatar" style="max-height: 690px;" />
+          <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+        </el-upload>
+      </el-tab-pane>
+      <!-------------------------核心优势-------------------------------->
+      <el-tab-pane label="核心优势" name="third">
+        <br />
+        <br />
+        <el-upload
+          class="avatar-uploader"
+          style="height: 92%;"
+          action="https://jsonplaceholder.typicode.com/posts/"
+          :show-file-list="false"
+          :before-upload="BeforeAvatarUpload"
+        >
+          <img v-if="hxys.img" :src="hxys.img" class="avatar" style="max-height: 790px;" />
           <i v-else class="el-icon-plus avatar-uploader-icon"></i>
         </el-upload>
       </el-tab-pane>
@@ -43,6 +62,7 @@ export default {
       index: 0,
       banner: {},
       lianmeng: {},
+      hxys:{},
       ossSign:{}
     };
   },
@@ -69,8 +89,10 @@ export default {
         if (result.data.code == 200) {
           if (this.index + 1 == 1) {
             this.banner = result.data.data;
-          } else {
+          } else if(this.index+1==2){
             this.lianmeng = result.data.data;
+          }else if(this.index+1==3){
+            this.hxys=result.data.data;
           }
         }
       });
@@ -103,6 +125,12 @@ export default {
             _that.lianmeng.img = result.url;
             _that.$axios
               .post("/oppoLianmeng/save", _that.lianmeng)
+              .then(result => {});
+          }
+          if (_that.index + 1 == 3) {
+            _that.hxys.img = result.url;
+            _that.$axios
+              .post("/oppoLianmeng/save", _that.hxys)
               .then(result => {});
           }
         })

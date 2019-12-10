@@ -4,6 +4,8 @@
     <br />
     <el-tabs v-model="activeName" @tab-click="handleClick">
       <el-tab-pane label="Banner图" name="first">
+        <br />
+        <br />
         <el-upload
           class="avatar-uploader"
           style="height: 92%;"
@@ -17,6 +19,7 @@
       </el-tab-pane>
       <!------------------------------------------------------------------------->
       <el-tab-pane label="OPPO信息流" name="second">
+        
         <div style="float:right;margin-right:100px;">
           <el-link type="primary" @click="dialogVisible=true">
             <svg class="icon" aria-hidden="true">
@@ -50,6 +53,8 @@
       </el-tab-pane>
       <!------------------------------------------------------------------------------------------------>
       <el-tab-pane label="广告形式丰富" name="third" style="height: 100%;">
+        <br />
+        <br />
         <el-upload
           class="avatar-uploader"
           style="height: 92%;"
@@ -63,6 +68,7 @@
       </el-tab-pane>
       <!----------------------------------------------------------------------------------------------->
       <el-tab-pane label="多场景、多路径融合" name="fourth" style="height: 100%;">
+        
         <div style="float:right;margin-right:100px;">
           <el-link type="primary" @click="dialogVisible2=true">
             <svg class="icon" aria-hidden="true">
@@ -93,8 +99,23 @@
           </el-table-column>
         </el-table>
       </el-tab-pane>
+      <!-----------------------------开发流程-------------------------------->
+    <el-tab-pane label="开发流程" name="fifth" style="height: 100%;">
+      <br />
+        <br />
+          <el-upload
+          class="avatar-uploader"
+          style="height: 92%;"
+          action="https://jsonplaceholder.typicode.com/posts/"
+          :show-file-list="false"
+          :before-upload="BeforeAvatarUpload"
+        >
+          <img v-if="kflc.img" :src="kflc.img" class="avatar" style="max-height: 690px;" />
+          <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+        </el-upload>
+    </el-tab-pane>
     </el-tabs>
-
+    
     <!----------------------------------------------模态框信息流------------------------------------------------------------------->
     <el-dialog :visible.sync="dialogVisible" width="50%">
       <span>
@@ -174,7 +195,8 @@ export default {
       banner: {}, //Banner图
       oppoxxl: {}, //OPPO信息流
       ggxsff: {}, //广告形式丰富
-      dcj: {} //多场景、多路径融合
+      dcj: {}, //多场景、多路径融合
+      kflc:{} //开发流程
     };
   },
   created() {
@@ -211,6 +233,9 @@ export default {
           if (result.data.data.type == 4) {
             this.dcj = result.data.data;
             this.dcj.img = JSON.parse(this.dcj.img);
+          }
+          if (result.data.data.type == 5) {
+            this.kflc = result.data.data;
           }
         }
       });
@@ -302,6 +327,12 @@ export default {
             _that.ggxsff.img = result.url;
             _that.$axios
               .post("/oppoXinxiliu/update", _that.ggxsff)
+              .then(result => {});
+          }
+          if (_that.index + 1 == 5) {
+            _that.kflc.img = result.url;
+            _that.$axios
+              .post("/oppoXinxiliu/update", _that.kflc)
               .then(result => {});
           }
         })
