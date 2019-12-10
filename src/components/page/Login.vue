@@ -3,14 +3,14 @@
         <div class="ms-login" >
             <div class="ms-title">后台管理系统</div>
             <el-form :model="ruleForm"   ref="ruleForm" label-width="0px" class="ms-content">
-                <el-form-item prop="username">
-                    <el-input v-model="ruleForm.userName" placeholder="请输入登陆名">
+                <el-form-item prop="username" >
+                    <el-input v-model="ruleForm.userName" placeholder="请输入登陆名" style="margin-left: -1px;">
                         <el-button slot="prepend" icon="iconfont icon-yonghuming"></el-button>
                     </el-input>
                 </el-form-item>
                 <br>
-                <el-form-item prop="password">
-                    <el-input type="password" placeholder="请输入密码" v-model="ruleForm.userPassword" @keyup.enter.native="submitForm('ruleForm')">
+                <el-form-item prop="password" >
+                    <el-input type="password" placeholder="请输入密码" style="margin-left: -1px;" v-model="ruleForm.userPassword" @keyup.enter.native="submitForm('ruleForm')">
                         <el-button slot="prepend" icon="iconfont icon-lunkuodasan-"></el-button>
                     </el-input>
                 </el-form-item>

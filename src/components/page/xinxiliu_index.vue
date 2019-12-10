@@ -28,7 +28,7 @@
         <br />
         <br />
         <!-- @selection-change="handleSelectionChange" -->
-        <el-table :data="oppoxxl.img" border style="width: 100%" height="500">
+        <el-table :data="oppoxxl.img" border style="width: 100%">
           <el-table-column type="selection" width="55" align="center"></el-table-column>
           <el-table-column label="图片" align="center">
             <template slot-scope="scope">
@@ -48,9 +48,9 @@
           </el-table-column>
         </el-table>
       </el-tab-pane>
-<!------------------------------------------------------------------------------------------------>
+      <!------------------------------------------------------------------------------------------------>
       <el-tab-pane label="广告形式丰富" name="third" style="height: 100%;">
-          <el-upload
+        <el-upload
           class="avatar-uploader"
           style="height: 92%;"
           action="https://jsonplaceholder.typicode.com/posts/"
@@ -61,23 +61,42 @@
           <i v-else class="el-icon-plus avatar-uploader-icon"></i>
         </el-upload>
       </el-tab-pane>
-<!----------------------------------------------------------------------------------------------->
+      <!----------------------------------------------------------------------------------------------->
       <el-tab-pane label="多场景、多路径融合" name="fourth" style="height: 100%;">
-          <el-upload
-          class="avatar-uploader"
-          style="height: 92%;"
-          action="https://jsonplaceholder.typicode.com/posts/"
-          :show-file-list="false"
-          :before-upload="BeforeAvatarUpload"
-        >
-          <img v-if="dcj.img" :src="dcj.img" class="avatar" style="max-height: 690px;" />
-          <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-        </el-upload>
+        <div style="float:right;margin-right:100px;">
+          <el-link type="primary" @click="dialogVisible2=true">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-add" />
+            </svg>
+            新增
+          </el-link>
+        </div>
+        <br />
+        <br />
+        <el-table :data="dcj.img" border style="width: 100%">
+          <el-table-column type="selection" width="55" align="center"></el-table-column>
+          <el-table-column label="图片" align="center">
+            <template slot-scope="scope">
+              <el-popover trigger="hover" placement="right">
+                <img :src="scope.row.imageUrl" style="max-width:800px;max-height:800px;" />
+                <div slot="reference" class="name-wrapper">
+                  <img :src="scope.row.imageUrl" style="max-width:80px;max-height:100px;" />
+                </div>
+              </el-popover>
+            </template>
+          </el-table-column>
+          <el-table-column prop="dataTime" label="上传时间" align="center"></el-table-column>
+          <el-table-column label="操作" align="center">
+            <template slot-scope="scope">
+              <el-button size="mini" type="danger" @click="deletedcjRow(scope.$index, tableData)">删除</el-button>
+            </template>
+          </el-table-column>
+        </el-table>
       </el-tab-pane>
     </el-tabs>
 
-    <!----------------------------------------------模态框------------------------------------------------------------------->
-    <el-dialog :visible.sync="dialogVisible" width="40%">
+    <!----------------------------------------------模态框信息流------------------------------------------------------------------->
+    <el-dialog :visible.sync="dialogVisible" width="50%">
       <span>
         <el-form :model="ruleForm" ref="ruleForm" label-width="100px" class="demo-ruleForm">
           <el-upload
@@ -88,13 +107,46 @@
             :before-close="handleClose2"
             :before-upload="beforeAvatarUpload2"
           >
-            <img v-if="ruleForm.imageUrl" :src="ruleForm.imageUrl" class="avatar" style="width:30%" />
+            <img
+              v-if="ruleForm.imageUrl"
+              :src="ruleForm.imageUrl"
+              class="avatar"
+              style="width: 30%;"
+            />
             <i v-else class="el-icon-plus avatar-uploader-icon"></i>
           </el-upload>
         </el-form>
       </span>
       <span slot="footer" class="dialog-footer">
         <el-button @click="dialogVisible = false">取 消</el-button>
+        <el-button type="primary" @click="saveBanner()" :loading="savaBannerFlg">确认保存</el-button>
+      </span>
+    </el-dialog>
+
+    <!----------------------------------------------模态框多场景----------------------------------------------------------------->
+    <el-dialog :visible.sync="dialogVisible2" width="50%">
+      <span>
+        <el-form :model="ruleForm" ref="ruleForm" label-width="100px" class="demo-ruleForm">
+          <el-upload
+            style="height: 100%;"
+            class="avatar-uploader"
+            action="https://jsonplaceholder.typicode.com/posts/"
+            :show-file-list="false"
+            :before-close="handleClose2"
+            :before-upload="beforeAvatarUpload2"
+          >
+            <img
+              v-if="ruleForm.imageUrl"
+              :src="ruleForm.imageUrl"
+              class="avatar"
+              style="width: 100%;"
+            />
+            <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+          </el-upload>
+        </el-form>
+      </span>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="dialogVisible2 = false">取 消</el-button>
         <el-button type="primary" @click="saveBanner()" :loading="savaBannerFlg">确认保存</el-button>
       </span>
     </el-dialog>
@@ -110,6 +162,7 @@ export default {
   data() {
     return {
       dialogVisible: false,
+      dialogVisible2: false,
       savaBannerFlg: false,
       ossSign: {},
       ruleForm: {
@@ -152,11 +205,12 @@ export default {
             this.oppoxxl = result.data.data;
             this.oppoxxl.img = JSON.parse(this.oppoxxl.img);
           }
-          if(result.data.data.type==3){
-              this.ggxsff = result.data.data;
+          if (result.data.data.type == 3) {
+            this.ggxsff = result.data.data;
           }
-          if(result.data.data.type==4){
-              this.dcj = result.data.data;
+          if (result.data.data.type == 4) {
+            this.dcj = result.data.data;
+            this.dcj.img = JSON.parse(this.dcj.img);
           }
         }
       });
@@ -179,6 +233,7 @@ export default {
         .put(timestamp, file)
         .then(function(result) {
           console.log(result);
+
           _that.ruleForm.imageUrl = result.url;
         })
         .catch(function(err) {
@@ -199,13 +254,22 @@ export default {
       //         this.savaBannerFlg = false;
       //       }
       //     });
-      this.oppoxxl.img.push(this.ruleForm);
-      this.oppoxxl.img = JSON.stringify(this.oppoxxl.img);
-      this.$axios.post("/oppoXinxiliu/update", this.oppoxxl).then(result => {
+      var param = {};
+      if (this.index + 1 == 2) {
+        this.oppoxxl.img.push(this.ruleForm);
+        this.oppoxxl.img = JSON.stringify(this.oppoxxl.img);
+        param = this.oppoxxl;
+      } else {
+        this.dcj.img.push(this.ruleForm);
+        this.dcj.img = JSON.stringify(this.dcj.img);
+        param = this.dcj;
+      }
+      this.$axios.post("/oppoXinxiliu/update", param).then(result => {
         if (result.data.code == 200) {
           this.dialogVisible = false;
           this.savaBannerFlg = false;
-          this.ruleForm.img=""
+          this.dialogVisible2 = false;
+          this.ruleForm.img = "";
           this.getByType();
         }
       });
@@ -234,7 +298,7 @@ export default {
               .post("/oppoXinxiliu/update", _that.banner)
               .then(result => {});
           }
-          if(_that.index + 1==3){
+          if (_that.index + 1 == 3) {
             _that.ggxsff.img = result.url;
             _that.$axios
               .post("/oppoXinxiliu/update", _that.ggxsff)
@@ -260,7 +324,26 @@ export default {
             .post("/oppoXinxiliu/update", this.oppoxxl)
             .then(result => {
               if (result.data.code == 200) {
-               
+                this.getByType();
+              }
+            });
+        })
+        .catch(() => {});
+    },
+    /***--------------------------------------多场景融合------------------------------------------------------ */
+    deletedcjRow(index, row) {
+      this.$confirm("是否要删除", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning"
+      })
+        .then(() => {
+          this.dcj.img.splice(index, 1);
+          this.dcj.img = JSON.stringify(this.dcj.img);
+          this.$axios
+            .post("/oppoXinxiliu/update", this.dcj)
+            .then(result => {
+              if (result.data.code == 200) {
                 this.getByType();
               }
             });
@@ -306,9 +389,9 @@ export default {
   display: block;
 }
 
-.el-input {
+/* .el-input {
   margin-left: -40px;
-}
+} */
 #pane-third {
   height: 400px;
 }

@@ -4,6 +4,8 @@ import test from '@/components/page/test.vue'
 import page_index from '../components/page/page_index.vue'
 import gongsi_index from '../components/page/gongsi_index.vue'
 import xinxiliu_index from '../components/page/xinxiliu_index.vue'
+import lianmeng from '../components/page/lianmeng_index.vue';
+import lainxiwomen_index from '../components/page/lainxiwomen_index.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -48,6 +50,16 @@ export default new Router({
                 component : xinxiliu_index,
                 meta : {title :"oppo信息流"}
 
+            },
+            {
+                path: '/lianmeng',
+                component: lianmeng,
+                meta:{title:'oppo联盟'}
+            },
+            {
+                path: '/lainxiwomen_index',
+                component: lainxiwomen_index,
+                meta:{title:'联系我们'}
             } 
         ]
     }

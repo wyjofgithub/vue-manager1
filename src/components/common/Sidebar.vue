@@ -51,9 +51,19 @@
                                 title: '公司简介'
                             },
                             {
-                                icon: 'iconfont icon-gongsi',
+                                icon: 'iconfont icon-xinxi1',
                                 index: 'xinxiliu_index',
                                 title: 'oppo信息流'
+                            },
+                            {
+                                icon: 'iconfont icon-lianmeng',
+                                index: 'lianmeng',
+                                title: 'oppo联盟'
+                            },
+                            {
+                                icon: 'iconfont icon-CONTACT',
+                                index: 'lainxiwomen_index',
+                                title: '联系我们'
                             }
                          
                      
