@@ -108,7 +108,7 @@ export default {
         accessKeySecret: this.ossSign.accesssecret,
         bucket: this.ossSign.bucket,
         signature: this.ossSign.signature,
-        region: "oss-cn-hangzhou"
+        region: "oss-cn-shanghai"
       });
       const _that = this;
       client
